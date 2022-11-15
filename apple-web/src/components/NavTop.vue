@@ -4,6 +4,7 @@
     <div class="appleicon _appleicon"><i class="iconfont icon-pingguo" @click="$router.push('/home')"></i></div>
     <div id="navID" class="mainnavlist _mainnavlist">
         <div class="navlistclose"><i @click="closecaidan()" class="iconfont icon-guanbi"></i></div>
+        <div @click="routerpush('/')">Apple</div>
         <div @click="routerpush('/mac')">Mac</div>
         <div @click="routerpush('/ipad')">iPad</div>
         <div @click="routerpush('/iphone')">iPhone</div>
