@@ -1,9 +1,17 @@
 <template>
   <div>
     <navtop></navtop>
-  <transition :name="transitionName">
+    <!-- first method transtion -->
+    <!-- <transition :name="transitionName">
     <router-view></router-view>
+  </transition> -->
+  <!-- second method transtion -->
+    <router-view v-slot="{ Component }">
+      <transition name="fade" mode="out-in">
+    <component :is="Component" />
   </transition>
+</router-view>
+  
   <footer></footer>
   </div>
   
@@ -25,10 +33,7 @@ export default {
   },
   watch: {
     $route(to, from) {
-      console.log(to, "to");
-      console.log(from, "from");
       const routerDeep = ['/', '/mac'];
-      //找到to.path和from.path在routerDeep数组中的下标
       const toDepth = routerDeep.indexOf(to.path);
       const fromDepth = routerDeep.indexOf(from.path);
       this.transitionName = toDepth > fromDepth ? 'fold-left' : 'fold-right';
@@ -58,6 +63,7 @@ nav {
     }
   }
 }
+// the first transtion style
 .fold-left-enter-active {
     animation-name: fold-left-in;
     animation-duration: .3s;
@@ -119,4 +125,16 @@ nav {
       transform: translate3d(100%, 0, 0);
     }
   }
+
+  /**********   the second transition style  ********/
+  
+  .fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>
